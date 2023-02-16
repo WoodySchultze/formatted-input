@@ -100,7 +100,7 @@ export default function FormattedInput({ formatType, groupSeparator, emit }: Inp
       } else if (len >= 7 && len <= 10) {
         formatted = `${value.slice(0, 3)}-${value.slice(3, 6)}-${value.slice(6, 10)}`;
       } else if (len > 10) {
-        toast.error("Phone number can only be 10 digits!");
+        toast.warn("Phone number can only be 10 digits!");
         throw new Error("Phone number can only be 10 digits");
       }
     }

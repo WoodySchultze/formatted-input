@@ -1,66 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import "./App.css";
-import FormattedInput from "./components/FormattedInput";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-interface AppState {
-  kind: string;
-  value: string;
-  number: number;
-  formatted: string;
-  valid: boolean;
-  errorMsg: string;
-}
+import HomePage from "./pages/HomePage";
+import CurrencyInputPage from "./pages/CurrencyInputPage";
+import PhoneNumberInputPage from "./pages/PhoneNumberInputPage";
 
 function App() {
-  const [currencyState, setCurrencyState] = useState<AppState>({
-    kind: "currency",
-    value: "",
-    number: 0,
-    formatted: "",
-    valid: false,
-    errorMsg: "",
-  });
-  const [phoneNumberState, setPhoneNumberState] = useState<AppState>({
-    kind: "phone number",
-    value: "",
-    number: 0,
-    formatted: "",
-    valid: false,
-    errorMsg: "",
-  });
   return (
     <div className="App">
-      <label>Currency Input</label>
-      <FormattedInput
-        formatType="currency"
-        groupSeparator=","
-        emit={(value, number, formatted, valid, errorMsg) =>
-          setCurrencyState((s) => ({
-            ...s,
-            value: value,
-            number: number,
-            formatted: formatted,
-            valid: valid,
-            errorMsg: errorMsg,
-          }))
-        }
-      />
-      <br />
-      <br />
-      <label>Phone Number Input</label>
-      <FormattedInput
-        formatType="phoneNumber"
-        groupSeparator="-"
-        emit={(value, number, formatted, valid, errorMsg) =>
-          setPhoneNumberState((s) => ({
-            ...s,
-            value: value,
-            number: number,
-            formatted: formatted,
-            valid: valid,
-            errorMsg: errorMsg,
-          }))
-        }
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="currency-input-examples" element={<CurrencyInputPage />} />
+          <Route path="phone-number-input-examples" element={<PhoneNumberInputPage />} />
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme={"dark"}
       />
     </div>
   );

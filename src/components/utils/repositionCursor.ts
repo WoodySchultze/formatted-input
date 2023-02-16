@@ -27,11 +27,9 @@ export const repositionCursor = ({
   let modifiedValue = eventTargetValue;
   if (formattedValueFromState && modifiedCursorPosition) {
     const splitValue = eventTargetValue.split("");
-    console.log("splitValue: ", splitValue);
 
     // if cursor is to right of groupSeparator and backspace pressed, delete the character to the left of the separator and reposition the cursor
     if (lastKeyDown === "Backspace" && formattedValueFromState[modifiedCursorPosition] === groupSeparator) {
-      console.log("RIGHT");
       splitValue.splice(modifiedCursorPosition - 1, 1);
       modifiedCursorPosition -= 1;
     }
@@ -43,7 +41,6 @@ export const repositionCursor = ({
     }
 
     modifiedValue = splitValue.join("");
-    console.log("modifiedValue: ", modifiedValue);
 
     return { modifiedValue, modifiedCursorPosition };
   }
